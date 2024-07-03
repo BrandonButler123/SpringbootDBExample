@@ -1,15 +1,12 @@
-package com.keyin;
+package com.keyin.dog;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
+
 
 @Entity
 public class Dog {
     @Id
-    @SequenceGenerator(name = "dog_sequence", sequenceName = "dog_sequence", allocationSize = 1, initialValue=1)
-    @GeneratedValue(generator = "dog_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
@@ -27,6 +24,7 @@ public class Dog {
         this.age = age;
         this.breed = breed;
     }
+
 
     public String getName() {
         return name;

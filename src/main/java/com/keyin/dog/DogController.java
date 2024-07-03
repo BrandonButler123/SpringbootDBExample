@@ -1,9 +1,12 @@
-package com.keyin;
+package com.keyin.dog;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -15,7 +18,7 @@ public class DogController {
 
 
     @PostMapping("/createDog")
-    public ResponseEntity<String> createDog(@RequestBody Dog dog) {
+    public ResponseEntity<?> createDog(@RequestBody Dog dog) {
 
         if(dog != null){
             dogService.createDog(dog);
@@ -23,8 +26,17 @@ public class DogController {
         }
         return  new ResponseEntity<>("Dog Object Is Empty", HttpStatusCode.valueOf(404));
 
+    }
 
+    @GetMapping("/listOfDogs")
+    public List<Dog> getAllDogs() {
 
+        return dogService.getListOfAllDogs();
 
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Dog> getDogById(@PathVariable Long id) {
+        return dogService.getDogById(id);
     }
 }
